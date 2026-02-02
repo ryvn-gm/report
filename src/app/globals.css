@@ -1,0 +1,188 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans), var(--font-noto-sans-tc);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* Japandi / Morandi Color Palette */
+:root {
+  --radius: 0.5rem;
+
+  /* Warm off-white background - like natural paper */
+  --background: #FAFAF8;
+  --foreground: #3D3D3D;
+
+  /* Cards with subtle warmth */
+  --card: #FFFFFF;
+  --card-foreground: #3D3D3D;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #3D3D3D;
+
+  /* Primary - Morandi dusty sage */
+  --primary: #7D8B7C;
+  --primary-foreground: #FAFAF8;
+
+  /* Secondary - Warm sand/beige */
+  --secondary: #F5F0EB;
+  --secondary-foreground: #5C5C5C;
+
+  /* Muted - Soft warm gray */
+  --muted: #F0EDE8;
+  --muted-foreground: #8B8B8B;
+
+  /* Accent - Dusty terracotta */
+  --accent: #C9A690;
+  --accent-foreground: #3D3D3D;
+
+  /* Destructive - Muted coral */
+  --destructive: #C4716C;
+
+  /* Borders - Very subtle */
+  --border: #E8E4DE;
+  --input: #E8E4DE;
+  --ring: #7D8B7C;
+
+  /* Chart colors - Morandi palette */
+  --chart-1: #7D8B7C; /* Sage green */
+  --chart-2: #A8B5A0; /* Light sage */
+  --chart-3: #C9A690; /* Dusty terracotta */
+  --chart-4: #B8A99A; /* Warm taupe */
+  --chart-5: #9EB3B7; /* Dusty blue */
+
+  /* Sidebar */
+  --sidebar: #F5F0EB;
+  --sidebar-foreground: #3D3D3D;
+  --sidebar-primary: #7D8B7C;
+  --sidebar-primary-foreground: #FAFAF8;
+  --sidebar-accent: #E8E4DE;
+  --sidebar-accent-foreground: #3D3D3D;
+  --sidebar-border: #E8E4DE;
+  --sidebar-ring: #7D8B7C;
+}
+
+.dark {
+  /* Dark mode - Warm dark tones */
+  --background: #1C1C1A;
+  --foreground: #E8E4DE;
+
+  --card: #252522;
+  --card-foreground: #E8E4DE;
+
+  --popover: #252522;
+  --popover-foreground: #E8E4DE;
+
+  --primary: #A8B5A0;
+  --primary-foreground: #1C1C1A;
+
+  --secondary: #2D2D2A;
+  --secondary-foreground: #D4D0C8;
+
+  --muted: #2D2D2A;
+  --muted-foreground: #9B9B95;
+
+  --accent: #C9A690;
+  --accent-foreground: #1C1C1A;
+
+  --destructive: #C4716C;
+
+  --border: #3D3D38;
+  --input: #3D3D38;
+  --ring: #A8B5A0;
+
+  --chart-1: #A8B5A0;
+  --chart-2: #9EB3B7;
+  --chart-3: #C9A690;
+  --chart-4: #B8A99A;
+  --chart-5: #7D8B7C;
+
+  --sidebar: #252522;
+  --sidebar-foreground: #E8E4DE;
+  --sidebar-primary: #A8B5A0;
+  --sidebar-primary-foreground: #1C1C1A;
+  --sidebar-accent: #2D2D2A;
+  --sidebar-accent-foreground: #E8E4DE;
+  --sidebar-border: #3D3D38;
+  --sidebar-ring: #A8B5A0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-geist-sans), var(--font-noto-sans-tc), ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+/* Japandi Design Utilities */
+@layer components {
+  /* Notion-style heading with vertical bar */
+  .heading-bar {
+    @apply relative pl-4;
+  }
+  .heading-bar::before {
+    content: "";
+    @apply absolute left-0 top-0 bottom-0 w-1 rounded-full;
+    background: var(--primary);
+  }
+
+  /* Soft shadow for cards - Japandi style */
+  .shadow-soft {
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05),
+                0 4px 16px -4px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Hover effect - subtle and refined */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  .hover-lift:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.08),
+                0 8px 24px -8px rgba(0, 0, 0, 0.06);
+  }
+}
