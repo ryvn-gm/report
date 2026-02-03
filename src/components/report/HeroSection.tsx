@@ -77,10 +77,10 @@ export function HeroSection() {
           className="mb-6 text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl"
         >
           <TypeAnimation
-            sequence={["交大 SLM", 1000, "交大 SLM 專案", 500, "交大 SLM 專案進度報告"]}
+            sequence={["交大 SLM 專案進度報告"]}
             wrapper="span"
-            speed={50}
-            cursor={false}
+            speed={30}
+            cursor={true}
           />
         </motion.h1>
 
