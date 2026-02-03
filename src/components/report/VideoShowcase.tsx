@@ -2,7 +2,14 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Play, Monitor, Smartphone, Database, X, Maximize2 } from "lucide-react";
+import {
+  Play,
+  Monitor,
+  Smartphone,
+  Database,
+  X,
+  Maximize2,
+} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -102,56 +109,65 @@ export function VideoShowcase() {
 
             {demos.map((demo) => (
               <TabsContent key={demo.id} value={demo.id}>
-                <div className="grid gap-6 lg:grid-cols-2">
-                  {/* Video preview */}
+                <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-center">
+                  {/* Phone mockup with video */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4 }}
+                    className="flex-shrink-0"
                   >
-                    <Card
-                      className="group relative aspect-video cursor-pointer overflow-hidden border-0 shadow-soft"
+                    <div
+                      className="group relative cursor-pointer"
                       onClick={() => handleVideoClick(demo)}
                     >
-                      {/* Video element as preview */}
-                      <video
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        src={demo.videoSrc}
-                        muted
-                        playsInline
-                        preload="metadata"
-                        onMouseEnter={(e) => {
-                          const video = e.currentTarget;
-                          video.currentTime = 0;
-                          video.play().catch(() => {});
-                        }}
-                        onMouseLeave={(e) => {
-                          const video = e.currentTarget;
-                          video.pause();
-                          video.currentTime = 0;
-                        }}
-                      />
+                      {/* Phone frame */}
+                      <div className="relative rounded-[2.5rem] border-[8px] border-foreground/10 bg-foreground/5 p-2 shadow-soft transition-transform duration-300 group-hover:scale-[1.02]">
+                        {/* Phone notch */}
+                        <div className="absolute left-1/2 top-0 z-10 h-6 w-24 -translate-x-1/2 rounded-b-2xl bg-foreground/10" />
 
-                      {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        {/* Video container - maintains phone aspect ratio */}
+                        <div className="relative h-[400px] w-[185px] overflow-hidden rounded-[2rem] bg-black sm:h-[450px] sm:w-[207px]">
+                          <video
+                            className="h-full w-full object-cover"
+                            src={demo.videoSrc}
+                            muted
+                            playsInline
+                            preload="metadata"
+                            onMouseEnter={(e) => {
+                              const video = e.currentTarget;
+                              video.currentTime = 0;
+                              video.play().catch(() => {});
+                            }}
+                            onMouseLeave={(e) => {
+                              const video = e.currentTarget;
+                              video.pause();
+                              video.currentTime = 0;
+                            }}
+                          />
 
-                      {/* Play button overlay */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/90 shadow-lg backdrop-blur-sm transition-all group-hover:bg-primary"
-                        >
-                          <Play className="ml-1 h-6 w-6 text-primary-foreground" />
-                        </motion.div>
+                          {/* Play button overlay */}
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity group-hover:bg-black/10">
+                            <motion.div
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/90 shadow-lg backdrop-blur-sm transition-all group-hover:bg-primary"
+                            >
+                              <Play className="ml-1 h-5 w-5 text-primary-foreground" />
+                            </motion.div>
+                          </div>
+                        </div>
+
+                        {/* Home indicator */}
+                        <div className="absolute bottom-2 left-1/2 h-1 w-16 -translate-x-1/2 rounded-full bg-foreground/20" />
                       </div>
 
                       {/* Expand hint */}
-                      <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-lg bg-card/80 px-3 py-1.5 text-xs backdrop-blur-sm opacity-0 transition-opacity group-hover:opacity-100">
+                      <div className="mt-3 flex items-center justify-center gap-2 text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
                         <Maximize2 className="h-3 w-3" />
                         點擊放大播放
                       </div>
-                    </Card>
+                    </div>
                   </motion.div>
 
                   {/* Demo description */}
@@ -159,16 +175,13 @@ export function VideoShowcase() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: 0.1 }}
+                    className="w-full max-w-md"
                   >
-                    <Card className="h-full border-0 shadow-soft">
+                    <Card className="border-0 shadow-soft">
                       <CardContent className="p-6">
                         <div className="mb-4 flex items-center gap-3">
-                          <div
-                            className={`flex h-10 w-10 items-center justify-center rounded-lg bg-${demo.color}/10`}
-                          >
-                            <demo.icon
-                              className={`h-5 w-5 text-${demo.color}`}
-                            />
+                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                            <demo.icon className="h-5 w-5 text-primary" />
                           </div>
                           <div>
                             <h3 className="font-medium">{demo.title}</h3>
@@ -209,9 +222,9 @@ export function VideoShowcase() {
         </motion.div>
       </div>
 
-      {/* Video Modal */}
+      {/* Video Modal - optimized for vertical phone videos */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-5xl border-0 bg-background/95 p-0 backdrop-blur-md">
+        <DialogContent className="max-h-[90vh] max-w-fit border-0 bg-background/95 p-0 backdrop-blur-md">
           <DialogHeader className="absolute right-4 top-4 z-10">
             <button
               onClick={() => setIsModalOpen(false)}
@@ -222,17 +235,29 @@ export function VideoShowcase() {
           </DialogHeader>
           {selectedVideo && (
             <div className="p-6">
-              <DialogTitle className="mb-4 text-lg font-medium">
+              <DialogTitle className="mb-4 text-center text-lg font-medium">
                 {selectedVideo.title} - {selectedVideo.subtitle}
               </DialogTitle>
-              <div className="overflow-hidden rounded-xl">
-                <video
-                  className="h-auto w-full"
-                  src={selectedVideo.videoSrc}
-                  controls
-                  autoPlay
-                  playsInline
-                />
+              <div className="flex justify-center">
+                {/* Phone frame in modal */}
+                <div className="relative rounded-[2.5rem] border-[8px] border-foreground/10 bg-foreground/5 p-2">
+                  {/* Phone notch */}
+                  <div className="absolute left-1/2 top-0 z-10 h-6 w-24 -translate-x-1/2 rounded-b-2xl bg-foreground/10" />
+
+                  <div className="relative max-h-[70vh] w-auto overflow-hidden rounded-[2rem] bg-black">
+                    <video
+                      className="h-auto max-h-[70vh] w-auto"
+                      src={selectedVideo.videoSrc}
+                      controls
+                      autoPlay
+                      playsInline
+                      style={{ maxWidth: "min(90vw, 400px)" }}
+                    />
+                  </div>
+
+                  {/* Home indicator */}
+                  <div className="absolute bottom-2 left-1/2 h-1 w-16 -translate-x-1/2 rounded-full bg-foreground/20" />
+                </div>
               </div>
             </div>
           )}
