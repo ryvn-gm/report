@@ -3,6 +3,7 @@
 import {
   HeroSection,
   DeliverablesSection,
+  BugFixesSection,
   TimelineSection,
   VideoShowcase,
   LimitationsSection,
@@ -17,8 +18,11 @@ export default function SLMProgressReport() {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Deliverables Comparison */}
+      {/* NCTU Deliverables */}
       <DeliverablesSection />
+
+      {/* Bug Fixes Comparison */}
+      <BugFixesSection />
 
       {/* Demo Video Showcase */}
       <VideoShowcase />
