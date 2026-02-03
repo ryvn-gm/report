@@ -93,18 +93,18 @@ export function DeliverablesSection() {
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
             >
               <Card className="group h-full border-0 shadow-soft transition-all hover-lift">
-                <CardContent className="p-6">
+                <CardContent className="flex h-full flex-col p-6">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20">
                     <item.icon className="h-6 w-6 text-primary" />
                   </div>
 
                   <h3 className="mb-2 font-semibold">{item.title}</h3>
 
-                  <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                  <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {item.highlights.map((highlight) => (
                       <span
                         key={highlight}
