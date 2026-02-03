@@ -20,14 +20,14 @@ export default function SLMProgressReport() {
       {/* Deliverables Comparison */}
       <DeliverablesSection />
 
-      {/* Project Timeline */}
-      <TimelineSection />
-
       {/* Demo Video Showcase */}
       <VideoShowcase />
 
       {/* Limitations Section */}
       <LimitationsSection />
+
+      {/* Project Timeline */}
+      <TimelineSection />
 
       {/* Technical Analysis */}
       <TechAnalysis />
