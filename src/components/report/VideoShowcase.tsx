@@ -2,10 +2,15 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Play, Monitor, Smartphone, Database } from "lucide-react";
+import { Play, Monitor, Smartphone, Database, X, Maximize2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const demos = [
   {
@@ -13,6 +18,7 @@ const demos = [
     title: "Default 模型測試",
     subtitle: "Gemma 1B 基準測試",
     icon: Monitor,
+    videoSrc: "/english_versus_chinese_generation.mov",
     description: [
       "英文問答：詢問一般健康問題",
       "中文問答：展示生成故障（Looping/亂碼/簡中）現象",
@@ -25,6 +31,7 @@ const demos = [
     title: "多模型切換",
     subtitle: "Qwen 模型比較",
     icon: Smartphone,
+    videoSrc: "/model_switching(Qwen).mov",
     description: ["切換至 Qwen 模型", "展示不同模型的回應品質差異"],
     note: "GoMore 解除架構鎖定後實現",
     color: "accent",
@@ -34,6 +41,7 @@ const demos = [
     title: "RAG 功能示範",
     subtitle: "檢索增強生成",
     icon: Database,
+    videoSrc: "/rag.mov",
     description: [
       "上傳文件：示範上傳「台灣文化」相關文檔",
       "正確檢索：針對文檔內容提問，展示模型基於文件正確回答",
@@ -47,7 +55,15 @@ export function VideoShowcase() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeTab, setActiveTab] = useState("default");
-  const [isHovering, setIsHovering] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<(typeof demos)[0] | null>(
+    null
+  );
+
+  const handleVideoClick = (demo: (typeof demos)[0]) => {
+    setSelectedVideo(demo);
+    setIsModalOpen(true);
+  };
 
   return (
     <section ref={ref} className="px-6 py-24">
@@ -62,9 +78,7 @@ export function VideoShowcase() {
           <h2 className="heading-bar mx-auto mb-4 inline-block text-2xl font-semibold md:text-3xl">
             Demo 影片展示
           </h2>
-          <p className="text-muted-foreground">
-            實際運行效果與功能展示
-          </p>
+          <p className="text-muted-foreground">實際運行效果與功能展示</p>
         </motion.div>
 
         <motion.div
@@ -89,7 +103,7 @@ export function VideoShowcase() {
             {demos.map((demo) => (
               <TabsContent key={demo.id} value={demo.id}>
                 <div className="grid gap-6 lg:grid-cols-2">
-                  {/* Video placeholder */}
+                  {/* Video preview */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -97,55 +111,46 @@ export function VideoShowcase() {
                   >
                     <Card
                       className="group relative aspect-video cursor-pointer overflow-hidden border-0 shadow-soft"
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
+                      onClick={() => handleVideoClick(demo)}
                     >
-                      {/* Placeholder background with gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/80 to-muted">
-                        {/* Decorative elements */}
-                        <div className="absolute inset-0 opacity-30">
-                          <div className="absolute left-1/4 top-1/4 h-32 w-32 rounded-full bg-primary/20 blur-2xl" />
-                          <div className="absolute bottom-1/4 right-1/4 h-40 w-40 rounded-full bg-accent/20 blur-2xl" />
-                        </div>
+                      {/* Video element as preview */}
+                      <video
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        src={demo.videoSrc}
+                        muted
+                        playsInline
+                        preload="metadata"
+                        onMouseEnter={(e) => {
+                          const video = e.currentTarget;
+                          video.currentTime = 0;
+                          video.play().catch(() => {});
+                        }}
+                        onMouseLeave={(e) => {
+                          const video = e.currentTarget;
+                          video.pause();
+                          video.currentTime = 0;
+                        }}
+                      />
 
-                        {/* Phone mockup silhouette */}
-                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                          <motion.div
-                            animate={{
-                              y: isHovering ? -5 : 0,
-                              scale: isHovering ? 1.02 : 1,
-                            }}
-                            transition={{ duration: 0.3 }}
-                            className="h-48 w-24 rounded-3xl border-4 border-foreground/10 bg-card/50 shadow-2xl backdrop-blur-sm"
-                          >
-                            {/* Phone notch */}
-                            <div className="mx-auto mt-2 h-1.5 w-12 rounded-full bg-foreground/10" />
-                            {/* Phone content area */}
-                            <div className="m-2 mt-4 h-32 rounded-xl bg-foreground/5" />
-                            {/* Home indicator */}
-                            <div className="mx-auto mt-2 h-1 w-10 rounded-full bg-foreground/10" />
-                          </motion.div>
-                        </div>
-                      </div>
+                      {/* Overlay gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                       {/* Play button overlay */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <motion.div
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
-                          className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/90 shadow-lg backdrop-blur-sm transition-colors group-hover:bg-primary"
+                          className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/90 shadow-lg backdrop-blur-sm transition-all group-hover:bg-primary"
                         >
                           <Play className="ml-1 h-6 w-6 text-primary-foreground" />
                         </motion.div>
                       </div>
 
-                      {/* Coming soon badge */}
-                      <Badge
-                        variant="secondary"
-                        className="absolute right-4 top-4 rounded-md bg-card/80 backdrop-blur-sm"
-                      >
-                        影片即將上傳
-                      </Badge>
+                      {/* Expand hint */}
+                      <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-lg bg-card/80 px-3 py-1.5 text-xs backdrop-blur-sm opacity-0 transition-opacity group-hover:opacity-100">
+                        <Maximize2 className="h-3 w-3" />
+                        點擊放大播放
+                      </div>
                     </Card>
                   </motion.div>
 
@@ -203,6 +208,36 @@ export function VideoShowcase() {
           </Tabs>
         </motion.div>
       </div>
+
+      {/* Video Modal */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="max-w-5xl border-0 bg-background/95 p-0 backdrop-blur-md">
+          <DialogHeader className="absolute right-4 top-4 z-10">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-card/80 text-foreground/70 backdrop-blur-sm transition-colors hover:bg-card hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </DialogHeader>
+          {selectedVideo && (
+            <div className="p-6">
+              <DialogTitle className="mb-4 text-lg font-medium">
+                {selectedVideo.title} - {selectedVideo.subtitle}
+              </DialogTitle>
+              <div className="overflow-hidden rounded-xl">
+                <video
+                  className="h-auto w-full"
+                  src={selectedVideo.videoSrc}
+                  controls
+                  autoPlay
+                  playsInline
+                />
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
