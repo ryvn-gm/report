@@ -128,10 +128,10 @@ function PlanCard({
           <CardTitle className="text-lg">{plan.title}</CardTitle>
           <p className="text-sm text-muted-foreground">{plan.subtitle}</p>
         </CardHeader>
-        <CardContent className="space-y-5">
-          {/* Plan A: operations, Plan B: models + cost table */}
-          {type === "a" && "operations" in plan && (
-            <>
+        <CardContent className="flex h-full flex-col gap-5">
+          {/* Plan A: operations, Plan B: models — this area flexes to fill */}
+          <div className="flex-1">
+            {type === "a" && "operations" in plan && (
               <div>
                 <h4 className="mb-2 text-sm font-medium">操作方式</h4>
                 <ul className="space-y-2">
@@ -146,31 +146,9 @@ function PlanCard({
                   ))}
                 </ul>
               </div>
-              <div className="overflow-hidden rounded-lg border border-border">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs">成本項目</TableHead>
-                      <TableHead className="text-right text-xs">投入</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {(plan as typeof planA).costTable.map((row) => (
-                      <TableRow key={row.item}>
-                        <TableCell className="text-sm">{row.item}</TableCell>
-                        <TableCell className="text-right text-sm font-medium">
-                          {row.value}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </>
-          )}
+            )}
 
-          {type === "b" && "models" in plan && (
-            <>
+            {type === "b" && "models" in plan && (
               <div>
                 <h4 className="mb-2 text-sm font-medium">推薦模型</h4>
                 <div className="flex flex-wrap gap-2">
@@ -185,38 +163,65 @@ function PlanCard({
                   ))}
                 </div>
               </div>
-              <div className="overflow-hidden rounded-lg border border-border">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="text-xs">維度</TableHead>
-                      <TableHead className="text-right text-xs">1B</TableHead>
-                      <TableHead className="text-right text-xs">7B</TableHead>
-                      <TableHead className="text-right text-xs">增量</TableHead>
+            )}
+          </div>
+
+          {/* Cost table — aligned across both cards */}
+          {type === "a" && "costTable" in plan && (
+            <div className="overflow-hidden rounded-lg border border-border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-xs">成本項目</TableHead>
+                    <TableHead className="text-right text-xs">投入</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {(plan as typeof planA).costTable.map((row) => (
+                    <TableRow key={row.item}>
+                      <TableCell className="text-sm">{row.item}</TableCell>
+                      <TableCell className="text-right text-sm font-medium">
+                        {row.value}
+                      </TableCell>
                     </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {(plan as typeof planB).costComparison.map((row) => (
-                      <TableRow key={row.dimension}>
-                        <TableCell className="text-sm">{row.dimension}</TableCell>
-                        <TableCell className="text-right text-sm">
-                          {row.slm1b}
-                        </TableCell>
-                        <TableCell className="text-right text-sm">
-                          {row.slm7b}
-                        </TableCell>
-                        <TableCell className="text-right text-sm font-medium text-accent">
-                          {row.delta}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           )}
 
-          {/* Pros / Cons */}
+          {type === "b" && "costComparison" in plan && (
+            <div className="overflow-hidden rounded-lg border border-border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-xs">維度</TableHead>
+                    <TableHead className="text-right text-xs">1B</TableHead>
+                    <TableHead className="text-right text-xs">7B</TableHead>
+                    <TableHead className="text-right text-xs">增量</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {(plan as typeof planB).costComparison.map((row) => (
+                    <TableRow key={row.dimension}>
+                      <TableCell className="text-sm">{row.dimension}</TableCell>
+                      <TableCell className="text-right text-sm">
+                        {row.slm1b}
+                      </TableCell>
+                      <TableCell className="text-right text-sm">
+                        {row.slm7b}
+                      </TableCell>
+                      <TableCell className="text-right text-sm font-medium text-accent">
+                        {row.delta}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          )}
+
+          {/* Pros / Cons — pinned to bottom, aligned across both cards */}
           <div className="grid grid-cols-2 gap-3">
             <div className="rounded-lg bg-primary/5 p-3">
               <h5 className="mb-2 text-xs font-medium text-primary">優勢</h5>
