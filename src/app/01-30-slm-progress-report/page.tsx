@@ -10,6 +10,7 @@ import {
   TechAnalysis,
   RoadmapSection,
   DataDashboard,
+  ConclusionSection,
 } from "@/components/report";
 
 export default function SLMProgressReport() {
@@ -42,11 +43,14 @@ export default function SLMProgressReport() {
       {/* Roadmap & Solutions */}
       <RoadmapSection />
 
+      {/* Conclusion & Next Steps */}
+      <ConclusionSection />
+
       {/* Footer */}
       <footer className="border-t border-border/50 px-6 py-8">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-sm text-muted-foreground/70">
-            GoMore Progress Report Portal &copy; 2025
+            GoMore Progress Report Portal &copy; {new Date().getFullYear()}
           </p>
         </div>
       </footer>
