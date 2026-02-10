@@ -94,12 +94,12 @@ export function VideoShowcase() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-8 grid w-full grid-cols-3">
+            <TabsList className="mb-8 flex h-auto flex-wrap justify-center gap-3 bg-transparent p-0">
               {demos.map((demo) => (
                 <TabsTrigger
                   key={demo.id}
                   value={demo.id}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2.5 shadow-soft transition-all data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none"
                 >
                   <demo.icon className="h-4 w-4" />
                   <span className="hidden sm:inline">{demo.title}</span>
@@ -109,7 +109,7 @@ export function VideoShowcase() {
 
             {demos.map((demo) => (
               <TabsContent key={demo.id} value={demo.id}>
-                <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-start lg:justify-center">
+                <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-stretch lg:justify-center">
                   {/* Phone mockup with video */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
