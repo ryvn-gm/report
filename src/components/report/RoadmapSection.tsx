@@ -121,7 +121,7 @@ function PlanCard({
                 {plan.keyStats.cost}
               </Badge>
               <Badge className="rounded-md text-xs">
-                覆蓋率 {plan.keyStats.coverage}
+                可接受覆蓋率 {plan.keyStats.coverage}
               </Badge>
             </div>
           </div>
