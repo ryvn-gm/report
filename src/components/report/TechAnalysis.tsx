@@ -49,23 +49,23 @@ export function TechAnalysis() {
         </motion.div>
 
         <Tabs defaultValue="tokenization" className="space-y-8">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="tokenization" className="text-xs sm:text-sm">
+          <TabsList className="flex h-auto flex-wrap justify-center gap-3 bg-transparent p-0">
+            <TabsTrigger value="tokenization" className="rounded-lg border border-border bg-card px-4 py-2.5 text-xs shadow-soft transition-all data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none sm:text-sm">
               <Languages className="mr-1 h-3 w-3 sm:mr-2 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">分詞缺陷</span>
               <span className="sm:hidden">分詞</span>
             </TabsTrigger>
-            <TabsTrigger value="data" className="text-xs sm:text-sm">
+            <TabsTrigger value="data" className="rounded-lg border border-border bg-card px-4 py-2.5 text-xs shadow-soft transition-all data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none sm:text-sm">
               <Database className="mr-1 h-3 w-3 sm:mr-2 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">數據偏差</span>
               <span className="sm:hidden">數據</span>
             </TabsTrigger>
-            <TabsTrigger value="capacity" className="text-xs sm:text-sm">
+            <TabsTrigger value="capacity" className="rounded-lg border border-border bg-card px-4 py-2.5 text-xs shadow-soft transition-all data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none sm:text-sm">
               <Cpu className="mr-1 h-3 w-3 sm:mr-2 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">容量限制</span>
               <span className="sm:hidden">容量</span>
             </TabsTrigger>
-            <TabsTrigger value="looping" className="text-xs sm:text-sm">
+            <TabsTrigger value="looping" className="rounded-lg border border-border bg-card px-4 py-2.5 text-xs shadow-soft transition-all data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none sm:text-sm">
               <RefreshCw className="mr-1 h-3 w-3 sm:mr-2 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">迴圈問題</span>
               <span className="sm:hidden">迴圈</span>
