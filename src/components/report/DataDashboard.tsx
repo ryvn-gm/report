@@ -112,7 +112,7 @@ export function DataDashboard() {
 
   return (
     <section ref={ref} className="px-6 py-24">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-5xl">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -129,10 +129,16 @@ export function DataDashboard() {
         </motion.div>
 
         <Tabs defaultValue="performance" className="space-y-8">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="performance">效能比較</TabsTrigger>
-            <TabsTrigger value="quality">品質分析</TabsTrigger>
-            <TabsTrigger value="rag">RAG 改善</TabsTrigger>
+          <TabsList className="flex h-auto flex-wrap justify-center gap-3 bg-transparent p-0">
+            <TabsTrigger value="performance" className="rounded-lg border border-border bg-card px-4 py-2.5 text-xs shadow-soft transition-all data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none sm:text-sm">
+              效能比較
+            </TabsTrigger>
+            <TabsTrigger value="quality" className="rounded-lg border border-border bg-card px-4 py-2.5 text-xs shadow-soft transition-all data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none sm:text-sm">
+              品質分析
+            </TabsTrigger>
+            <TabsTrigger value="rag" className="rounded-lg border border-border bg-card px-4 py-2.5 text-xs shadow-soft transition-all data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none sm:text-sm">
+              RAG 改善
+            </TabsTrigger>
           </TabsList>
 
           {/* Performance comparison */}
@@ -158,7 +164,7 @@ export function DataDashboard() {
                       <Bar
                         dataKey="speed"
                         name="Token/s"
-                        fill="#7D8B7C"
+                        fill="#5C6E58"
                         radius={[4, 4, 0, 0]}
                       />
                     </BarChart>
@@ -184,7 +190,7 @@ export function DataDashboard() {
                       <Bar
                         dataKey="memory"
                         name="記憶體"
-                        fill="#C9A690"
+                        fill="#B8906F"
                         radius={[4, 4, 0, 0]}
                       />
                     </BarChart>
@@ -225,15 +231,15 @@ export function DataDashboard() {
                       <Radar
                         name="Default (Gemma)"
                         dataKey="Default"
-                        stroke="#7D8B7C"
-                        fill="#7D8B7C"
+                        stroke="#5C6E58"
+                        fill="#5C6E58"
                         fillOpacity={0.3}
                       />
                       <Radar
                         name="Qwen"
                         dataKey="Qwen"
-                        stroke="#C9A690"
-                        fill="#C9A690"
+                        stroke="#B8906F"
+                        fill="#B8906F"
                         fillOpacity={0.3}
                       />
                       <Legend />
@@ -311,13 +317,13 @@ export function DataDashboard() {
                       <Bar
                         dataKey="Default"
                         name="Default (Gemma)"
-                        fill="#7D8B7C"
+                        fill="#5C6E58"
                         radius={[0, 4, 4, 0]}
                       />
                       <Bar
                         dataKey="Qwen"
                         name="Qwen"
-                        fill="#C9A690"
+                        fill="#B8906F"
                         radius={[0, 4, 4, 0]}
                       />
                     </BarChart>
