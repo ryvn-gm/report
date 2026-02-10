@@ -21,7 +21,7 @@ const stats = [
     value: 11,
     suffix: "週",
     label: "專案週期",
-    description: "2024/11 - 2025/01",
+    description: "2025/11 - 2026/01",
   },
   {
     icon: FileText,
