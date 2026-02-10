@@ -8,8 +8,8 @@ import {
   VideoShowcase,
   LimitationsSection,
   TechAnalysis,
+  RoadmapSection,
   DataDashboard,
-  ConclusionSection,
 } from "@/components/report";
 
 export default function SLMProgressReport() {
@@ -33,14 +33,14 @@ export default function SLMProgressReport() {
       {/* Project Timeline */}
       <TimelineSection />
 
-      {/* Technical Analysis */}
-      <TechAnalysis />
-
       {/* Evaluation Data Dashboard */}
       <DataDashboard />
 
-      {/* Conclusion */}
-      <ConclusionSection />
+      {/* Technical Analysis */}
+      <TechAnalysis />
+
+      {/* Roadmap & Solutions */}
+      <RoadmapSection />
 
       {/* Footer */}
       <footer className="border-t border-border/50 px-6 py-8">

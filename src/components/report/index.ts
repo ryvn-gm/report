@@ -5,8 +5,8 @@ export { TimelineSection } from "./TimelineSection";
 export { VideoShowcase } from "./VideoShowcase";
 export { LimitationsSection } from "./LimitationsSection";
 export { TechAnalysis } from "./TechAnalysis";
+export { RoadmapSection } from "./RoadmapSection";
 export { DataDashboard } from "./DataDashboard";
-export { ConclusionSection } from "./ConclusionSection";
 export {
   AnimatedSection,
   FadeIn,
