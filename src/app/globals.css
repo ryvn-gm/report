@@ -52,55 +52,55 @@
 
   /* Warm off-white background - like natural paper */
   --background: #FAFAF8;
-  --foreground: #3D3D3D;
+  --foreground: #2A2A2A;
 
   /* Cards with subtle warmth */
   --card: #FFFFFF;
-  --card-foreground: #3D3D3D;
+  --card-foreground: #2A2A2A;
 
   --popover: #FFFFFF;
-  --popover-foreground: #3D3D3D;
+  --popover-foreground: #2A2A2A;
 
-  /* Primary - Morandi dusty sage */
-  --primary: #7D8B7C;
+  /* Primary - Morandi sage (stronger) */
+  --primary: #5C6E58;
   --primary-foreground: #FAFAF8;
 
   /* Secondary - Warm sand/beige */
   --secondary: #F5F0EB;
-  --secondary-foreground: #5C5C5C;
+  --secondary-foreground: #4A4A4A;
 
   /* Muted - Soft warm gray */
   --muted: #F0EDE8;
-  --muted-foreground: #8B8B8B;
+  --muted-foreground: #6B6B6B;
 
-  /* Accent - Dusty terracotta */
-  --accent: #C9A690;
-  --accent-foreground: #3D3D3D;
+  /* Accent - Richer terracotta */
+  --accent: #B8906F;
+  --accent-foreground: #2A2A2A;
 
-  /* Destructive - Muted coral */
-  --destructive: #C4716C;
+  /* Destructive - Stronger coral */
+  --destructive: #B85450;
 
   /* Borders - Very subtle */
   --border: #E8E4DE;
   --input: #E8E4DE;
-  --ring: #7D8B7C;
+  --ring: #5C6E58;
 
   /* Chart colors - Morandi palette */
-  --chart-1: #7D8B7C; /* Sage green */
+  --chart-1: #5C6E58; /* Sage green */
   --chart-2: #A8B5A0; /* Light sage */
-  --chart-3: #C9A690; /* Dusty terracotta */
+  --chart-3: #B8906F; /* Dusty terracotta */
   --chart-4: #B8A99A; /* Warm taupe */
   --chart-5: #9EB3B7; /* Dusty blue */
 
   /* Sidebar */
   --sidebar: #F5F0EB;
-  --sidebar-foreground: #3D3D3D;
-  --sidebar-primary: #7D8B7C;
+  --sidebar-foreground: #2A2A2A;
+  --sidebar-primary: #5C6E58;
   --sidebar-primary-foreground: #FAFAF8;
   --sidebar-accent: #E8E4DE;
-  --sidebar-accent-foreground: #3D3D3D;
+  --sidebar-accent-foreground: #2A2A2A;
   --sidebar-border: #E8E4DE;
-  --sidebar-ring: #7D8B7C;
+  --sidebar-ring: #5C6E58;
 }
 
 .dark {
