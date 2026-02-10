@@ -175,10 +175,10 @@ export function VideoShowcase() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: 0.1 }}
-                    className="w-full max-w-md"
+                    className="w-full max-w-md lg:flex"
                   >
-                    <Card className="border-0 shadow-soft">
-                      <CardContent className="p-6">
+                    <Card className="h-full border-0 shadow-soft">
+                      <CardContent className="flex h-full flex-col p-6">
                         <div className="mb-4 flex items-center gap-3">
                           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                             <demo.icon className="h-5 w-5 text-primary" />
@@ -191,7 +191,7 @@ export function VideoShowcase() {
                           </div>
                         </div>
 
-                        <div className="mb-4 space-y-3">
+                        <div className="mb-4 flex-1 space-y-3">
                           <h4 className="text-sm font-medium">展示內容：</h4>
                           <ul className="space-y-2">
                             {demo.description.map((desc, i) => (
