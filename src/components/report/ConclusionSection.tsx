@@ -7,8 +7,10 @@ import {
   AlertTriangle,
   ArrowRight,
   ExternalLink,
+  Flame,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -34,10 +36,29 @@ const keyTakeaways = [
 ];
 
 const nextSteps = [
-  "完成 iOS 讀檔問題的最終修復",
-  "優化 RAG 的 Prompt Engineering",
-  "持續追蹤交大 2/1 新版本交付狀況",
-  "準備下一階段的 Demo 與驗收",
+  {
+    title: "iOS 讀檔卡死問題修復",
+    description: "iOS 平台讀取文件時出現卡死現象，需排查並修復",
+    priority: "high" as const,
+  },
+  {
+    title: "中文生成無限迴圈處理",
+    description:
+      "目前已有 stop button，但可以嘗試從模型配置的參數去著手，比如 temperature",
+    priority: "normal" as const,
+  },
+  {
+    title: "RAG 幻覺優化",
+    description:
+      "可透過 prompt 的調整，提升 LLM 對於有效 chunk 的判定",
+    priority: "normal" as const,
+  },
+  {
+    title: "效能監控與優化",
+    description:
+      "優化記憶體管理，包括文檔的上限、模型載入記憶體用量上限等等都尚未知",
+    priority: "normal" as const,
+  },
 ];
 
 export function ConclusionSection() {
@@ -121,7 +142,7 @@ export function ConclusionSection() {
           <Card className="border-0 shadow-soft">
             <CardContent className="p-6">
               <h3 className="mb-4 font-medium">下一步計畫</h3>
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 {nextSteps.map((step, index) => (
                   <motion.div
                     key={index}
@@ -130,12 +151,23 @@ export function ConclusionSection() {
                       isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }
                     }
                     transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                    className="flex items-center gap-3 rounded-lg bg-secondary/50 p-3"
+                    className="rounded-lg bg-secondary/50 p-4"
                   >
-                    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-medium text-primary">
-                      {index + 1}
-                    </span>
-                    <span className="text-sm">{step}</span>
+                    <div className="mb-2 flex items-center gap-3">
+                      <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-medium text-primary">
+                        {index + 1}
+                      </span>
+                      <span className="text-sm font-medium">{step.title}</span>
+                      {step.priority === "high" && (
+                        <Badge variant="destructive" className="ml-auto flex items-center gap-1 rounded-md text-[10px]">
+                          <Flame className="h-3 w-3" />
+                          高優先級
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="pl-9 text-xs leading-relaxed text-muted-foreground">
+                      {step.description}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -161,14 +193,10 @@ export function ConclusionSection() {
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link href="/docs/01-30-slm-progress-report.md">
                 <ExternalLink className="mr-2 h-4 w-4" />
                 查看原始文件
-              </a>
+              </Link>
             </Button>
           </div>
         </motion.div>
